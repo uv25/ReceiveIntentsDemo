@@ -5,7 +5,7 @@ import { color } from "react-native-reanimated";
 export const Home = ()=> {
     return(
         <View style = {styles.containerStyle}>
-            <Text style = {{color: "red", fontSize: 20}}>Welcome to Home Screen</Text>
+            <Text style = {{color: "black", fontSize: 20}}>Welcome to Home Screen</Text>
         </View>
     );
 }
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "blue"
+        backgroundColor: "white"
     }
 })

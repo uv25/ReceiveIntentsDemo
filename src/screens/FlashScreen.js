@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 
 import ReceiveSharingIntent from 'react-native-receive-sharing-intent';
 import { externalFile } from "../../App";
@@ -15,16 +15,17 @@ export const FlashScreen = ({navigation})=> {
         console.log(files);
         externalFile = files[0].contentUri;
         externalFileMimetype = files[0].mimeType;
-        if(externalFileMimetype == 'application/pdf')
-        {
-          navigation.push("PdfScreen", {fileUri: externalFile});
-        }
-        else{
-          navigation.push("Image", {fileUri: externalFile});
-        }
-      }, 
+        // if(externalFileMimetype == 'application/pdf')
+        // {
+        //   navigation.push("PdfScreen", {fileUri: externalFile});
+        // }
+        // else{
+        //   navigation.push("Image", {fileUri: externalFile});
+        // }
+        navigation.navigate("ExternalFilesList", {filesList: files});
+      },
       (error) =>{
-        console.log(error);
+        Alert.alert('Something went wrong!', 'Unable to import files. Please try again.');
       }, 
       'ShareMedia' // share url protocol (must be unique to your app, suggest using your apple bundle id)
     );
@@ -39,8 +40,9 @@ export const FlashScreen = ({navigation})=> {
         return () => {
             ReceiveSharingIntent.clearReceivedFiles();
             externalFile = undefined;
+            externalFileMimetype = undefined;
         };
-      });
+      },[]);
     return(
         <View>
             <Text>Flash</Text>
